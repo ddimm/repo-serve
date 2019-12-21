@@ -29,6 +29,7 @@ func fetchapi(w *http.ResponseWriter) {
 }
 func handler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Content-type", "application/json")
+	w.Header().Add("Access-Control-Allow-Origin", "*")
 	fetchapi(&w)
 
 }
@@ -40,5 +41,6 @@ func main() {
 		WriteTimeout:   120 * time.Second,
 		MaxHeaderBytes: 1 << 50,
 	}
+
 	log.Fatal(s.ListenAndServe())
 }
