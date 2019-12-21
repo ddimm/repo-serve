@@ -34,11 +34,11 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 func main() {
 	s := &http.Server{
-		Addr:           ":8080",
+		Addr:           ":" + os.Getenv("PORT"),
 		Handler:        http.HandlerFunc(handler),
-		ReadTimeout:    10 * time.Second,
-		WriteTimeout:   10 * time.Second,
-		MaxHeaderBytes: 1 << 20,
+		ReadTimeout:    120 * time.Second,
+		WriteTimeout:   120 * time.Second,
+		MaxHeaderBytes: 1 << 50,
 	}
 	log.Fatal(s.ListenAndServe())
 }
