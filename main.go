@@ -13,13 +13,13 @@ func fetchapi(w *http.ResponseWriter) {
 	client := &http.Client{}
 	req, err := http.NewRequest("GET", "https://api.github.com/users/"+os.Getenv("GITHUB_USER")+"/repos", nil)
 	if err != nil {
-		log.Fatal("couldn't reach api")
+		log.Fatal(err.Error())
 	}
 	req.Header.Add("Authorization", "token "+os.Getenv("GITHUB_TOKEN"))
 	resp, err := client.Do(req)
 	fmt.Println(resp.Header.Get(("X-RateLimit-Remaining")))
 	if err != nil {
-		log.Fatal("couldn't reach api")
+		log.Fatal(err.Error())
 	}
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
