@@ -34,8 +34,13 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 }
 func main() {
+	port, hasPort := os.LookupEnv("PORT")
+	if !hasPort {
+		port = "8080"
+	}
+	fmt.Println(port)
 	s := &http.Server{
-		Addr:           ":" + os.Getenv("PORT"),
+		Addr:           ":" + port,
 		Handler:        http.HandlerFunc(handler),
 		ReadTimeout:    120 * time.Second,
 		WriteTimeout:   120 * time.Second,
